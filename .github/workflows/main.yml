@@ -12,6 +12,9 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v4
 
+      - name: Compile Java code
+        run: mvn compile
+
       - name: Maven test
         run: mvn test
 
@@ -34,6 +37,7 @@ jobs:
             -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.sources=src/
+            -Dsonar.java.binaries=target/classes 
             -Dsonar.junit.reportsPath=target/surefire-reports/
             -Dsonar.jacoco.reportsPath=target/jacoco.exec
             -Dsonar.java.checkstyle.reportsPath=target/checkstyle-result.xml
